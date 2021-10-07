@@ -1,15 +1,17 @@
 <template>
   <main v-if="!loading">
-    <DataTitle :text="title" :dataDate="dataDate"/>
-    <DataBoxes :status="status"/>
     <CountrySelect @get-country="getCountryData" :countries="countries"/>
 
     <button @click="clearCountryData"
             v-if="status.Country"
-        class="bg-purple-700 text-white rounded p-3 mt-8
+        class="bg-purple-700 text-white rounded p-2 mt-3
                     focus:outline-none hover:bg-purple-600">
       Clear Country
     </button>
+    <br>
+    <DataTitle :text="title" :dataDate="dataDate"/>
+    <DataBoxes :status="status"/>
+    
   </main>
 
 
@@ -65,6 +67,7 @@ export default {
   },
   async created() {
     const data = await this.fetchCovidData()
+    console.log(data)
 
     this.dataDate = data.Date
     this.status = data.Global
